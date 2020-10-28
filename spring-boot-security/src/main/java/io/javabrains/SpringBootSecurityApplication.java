@@ -14,3 +14,19 @@ public class SpringBootSecurityApplication {
 	}
 
 }
+
+/**
+Root URL	: http://localhost:8080 
+Logout URL	: http://localhost:8080/logout
+
+For Role: User
+Login: user 
+Password: user
+User Access	: http://localhost:8080/user
+
+For Role: Admin
+Login: admin 
+Password: admin
+Admin Access: http://localhost:8080/admin
+
+*/
