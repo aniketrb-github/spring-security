@@ -33,8 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
-			.dataSource(dataSource) // spring-sec points to embedded H2 database
-			.withDefaultSchema()	// and populates following data at start-up time
+			.dataSource(dataSource); // spring-sec points to embedded H2 database
+			/*.withDefaultSchema()	// and populates following data at start-up time
 			.withUser(
 					User.withUsername("user")
 					.password("pass")
@@ -44,8 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					User.withUsername("admin")
 					.password("pass")
 					.roles(ADMIN) 
-			);
-			
+			);*/
 	}
 	
 	/**
@@ -56,11 +55,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/admin").hasRole(ADMIN) // for /admin only admin role is allowed
-		.antMatchers("/user").hasAnyRole(USER, ADMIN) // for /user only user & admin roles allowed 
+		.antMatchers("/user").hasAnyRole(ADMIN, USER) // for /user only user & admin roles allowed 
 		.antMatchers("/").permitAll() // for root URL allow all users
 		.and()
 		.formLogin(); // We need a form based Login for our users
-	}
+	}	
 	
 	/**
 	 * This currently allows to save passwords in clear text format without any encoding or hashing
